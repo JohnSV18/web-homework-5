@@ -19,7 +19,6 @@ mongo = PyMongo(app)
 def plants_list():
     """Display the plants list page."""
 
-    
     plants_data = mongo.db.plants.find({})
 
     context = {
@@ -35,17 +34,22 @@ def about():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     """Display the plant creation page & process data from the creation form."""
+    plant = request.form.get('plant_name')
+    variety =  request.form.get('variety'),
+    photo_url = request.form.get('photo'),
+    date_planted = request.form.get('date_planted') 
+    
     if request.method == 'POST':
         
         new_plant = {
-            'name': request.form.get('plant_name'),
-            'variety': request.form.get('variety'),
-            'photo_url': request.form.get('photo'),
-            'date_planted':request.form.get('date_planted') 
+            'name': plant,
+            'variety': variety,
+            'photo_url': photo_url,
+            'date_planted':date_planted 
         }
      
-        result = mongo.db.plants.insertOne({new_plant})
-        result_id = result.inserted.id
+        result = mongo.db.plants.insert_one(new_plant)
+        result_id = result.inserted_id
        
 
         return redirect(url_for('detail', plant_id=result_id))
@@ -58,13 +62,15 @@ def detail(plant_id):
     """Display the plant detail page & process data from the harvest form."""
 
    
-    plant_to_show = mongo.db.plants.find_one({'_id': ObjectId(plant_id)})
+    plant_to_show = mongo.db.plants.find_one({
+        '_id': ObjectId(plant_id)
+    })
 
     
-    harvests = list(mongo.db.harvest.find({'plant_id':plant_id}))
+    harvests = list(mongo.db.harvest.find({
+        'plant_id':plant_id
+    }))
     print(harvests)
-
-
 
     context = {
         'plant' : plant_to_show['name'],
@@ -138,5 +144,5 @@ def delete(plant_id):
     
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0') 
 

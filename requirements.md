@@ -5,4 +5,4 @@
 | **⚙️ Deployment** | Project deployed on CapRover using your own domain                                              |✅ |    
 | **⚙️ Deployment** | Uptime monitored by FreshPing or another health check service                                   |✅ |
 |  **📝 Docs**  | `README` includes [badges](https://shields.io) for image size, build status, and website monitoring |✅ |
-|  **📝 Docs**  | `README` includes instructions on how to build and run your container                               |    |
+|  **📝 Docs**  | `README` includes instructions on how to build and run your container                               |✅ |

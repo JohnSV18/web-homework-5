@@ -1,14 +1,15 @@
 from flask import Flask, request, redirect, render_template, url_for
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, MongoClient
 from bson.objectid import ObjectId
+import os
 
 ############################################################
 # SETUP
 ############################################################
 
 app = Flask(__name__)
-
-app.config["MONGO_URI"] = "mongodb://localhost:27017/plantsDatabase"
+host = os.environ.get("MONGO_URI", 'mongodb+srv://Johnze:Pokemon100@plantsdb.vsybz.mongodb.net/myFirstDatabase') + '?retryWrites=true&w=majority'
+app.config["MONGO_URI"] = host
 mongo = PyMongo(app)
 
 ############################################################
@@ -70,15 +71,11 @@ def detail(plant_id):
     harvests = list(mongo.db.harvest.find({
         'plant_id':plant_id
     }))
-    print(harvests)
 
     context = {
-        'plant' : plant_to_show['name'],
-        'date_planted' : plant_to_show['date_planted'],
-        'harvest': harvest,
-        'variety' : plant_to_show['variety'],
-        'photo_url' : plant_to_show['photo_url'],
-        'plant_id' : plant_id
+        'plant' : plant_to_show,
+        'harvest': harvests,
+        'plant_id' : ObjectId(plant_id)
     }
 
     return render_template('detail.html', **context)
@@ -88,12 +85,14 @@ def harvest(plant_id):
     """
     Accepts a POST request with data for 1 harvest and inserts into database.
     """
-
+    date_harvested = request.form.get("date_harvested")
+    harvested_amount = request.form.get("harvested_amount")
+    input_string = harvested_amount
     
     new_harvest = {
-        'quantity': request.form.get('harvested_amount'),
-        'date': request.form.get('date_planted'),
-        'plant_id': plant_id
+        'quantity': input_string,
+        'date': date_harvested,
+        'plant_id': ObjectId(plant_id)
     }
 
     
@@ -144,5 +143,5 @@ def delete(plant_id):
     
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0') 
+    app.run(debug=True) 
 

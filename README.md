@@ -25,3 +25,6 @@ Once you've finished working with the containers just run:
 ```Terminal command
 docker-compose down
 ```
+#Check out the site!
+You can also checkout the live site by visiting http://plants-app.dev.johnmarcos.me/
+You can also checkout the live plants page status page by visiting https://statuspage.freshping.io/57044-ACS3220

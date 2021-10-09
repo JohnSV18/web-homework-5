@@ -1,3 +1,5 @@
 # Homework 5: Databases
 
-Follow the [instructions](https://make-school-courses.github.io/WEB-1.1-Web-Architecture/#/Assignments/04-Databases) to complete this assignment!
+/docker/image-size/:user/:repo?sort=date
+/docker/cloud/build/:user/:repo
+/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Fshields.io

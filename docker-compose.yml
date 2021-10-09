@@ -16,5 +16,5 @@ services:
     depends_on:
       - db
     environment:
-      WAIT_HOSTS: mongo:27017
+      WAIT_HOSTS: db:27017
   

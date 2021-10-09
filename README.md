@@ -1,5 +1,5 @@
 # Homework 5: Databases
 
-/docker/image-size/:user/:repo?sort=date
-/docker/cloud/build/:user/:repo
-/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Fshields.io
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/JohnSV18/web-homework-5)
+
+![Website](https://img.shields.io/website?down_color=red&down_message=Offline&up_color=green&up_message=Online&url=http%3A%2F%2Fplants-app.dev.johnmarcos.me%2F)
